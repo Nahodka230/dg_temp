@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+import copy
 
 DATA = {
     'omlet': {
@@ -16,15 +18,31 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
-}
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+}
+def omlet(request):
+    servings = int(request.GET.get("servings", 1))
+    context = {}
+    context['omlet'] = copy.deepcopy(DATA['omlet'])
+    for key in context['omlet']:
+        context['omlet'][key] = context['omlet'][key] * servings
+    print()
+    return render(request, 'omlet.html', context)
+
+def pasta(request):
+    servings = int(request.GET.get("servings", 1))
+    context = {}
+    context['pasta'] = copy.deepcopy(DATA['pasta'])
+    for key in context['pasta']:
+        context['pasta'][key] = context['pasta'][key] * servings
+    print()
+    return render(request, 'pasta.html', context)
+
+def buter(request):
+    servings = int(request.GET.get("servings", 1))
+    context = {}
+    context['buter'] = copy.deepcopy(DATA['buter'])
+    for key in context['buter']:
+        context['buter'][key] = context['buter'][key] * servings
+    print()
+    return render(request, 'buter.html', context)
