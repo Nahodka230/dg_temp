@@ -20,29 +20,38 @@ DATA = {
     },
 
 }
-def omlet(request):
+def dish_view(request, dish):
     servings = int(request.GET.get("servings", 1))
     context = {}
-    context['omlet'] = copy.deepcopy(DATA['omlet'])
-    for key in context['omlet']:
-        context['omlet'][key] = context['omlet'][key] * servings
-    print()
+    context['dish'] = copy.deepcopy(DATA[dish])
+    for key in context['dish']:
+        context['dish'][key] = context['dish'][key] * servings
+    print(context)
     return render(request, 'omlet.html', context)
 
-def pasta(request):
-    servings = int(request.GET.get("servings", 1))
-    context = {}
-    context['pasta'] = copy.deepcopy(DATA['pasta'])
-    for key in context['pasta']:
-        context['pasta'][key] = context['pasta'][key] * servings
-    print()
-    return render(request, 'pasta.html', context)
-
-def buter(request):
-    servings = int(request.GET.get("servings", 1))
-    context = {}
-    context['buter'] = copy.deepcopy(DATA['buter'])
-    for key in context['buter']:
-        context['buter'][key] = context['buter'][key] * servings
-    print()
-    return render(request, 'buter.html', context)
+# def omlet(request):
+#     servings = int(request.GET.get("servings", 1))
+#     context = {}
+#     context['omlet'] = copy.deepcopy(DATA['omlet'])
+#     for key in context['omlet']:
+#         context['omlet'][key] = context['omlet'][key] * servings
+#     print()
+#     return render(request, 'omlet.html', context)
+#
+# def pasta(request):
+#     servings = int(request.GET.get("servings", 1))
+#     context = {}
+#     context['pasta'] = copy.deepcopy(DATA['pasta'])
+#     for key in context['pasta']:
+#         context['pasta'][key] = context['pasta'][key] * servings
+#     print()
+#     return render(request, 'pasta.html', context)
+#
+# def buter(request):
+#     servings = int(request.GET.get("servings", 1))
+#     context = {}
+#     context['buter'] = copy.deepcopy(DATA['buter'])
+#     for key in context['buter']:
+#         context['buter'][key] = context['buter'][key] * servings
+#     print()
+#     return render(request, 'buter.html', context)

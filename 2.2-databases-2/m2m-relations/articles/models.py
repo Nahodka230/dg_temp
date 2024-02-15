@@ -1,4 +1,15 @@
 from django.db import models
+from django.forms import DateTimeField, BooleanField
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=256, verbose_name='Название')
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
+
+    def __str__(self):
+        return self.name
 
 
 class Article(models.Model):
@@ -7,10 +18,21 @@ class Article(models.Model):
     text = models.TextField(verbose_name='Текст')
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     image = models.ImageField(null=True, blank=True, verbose_name='Изображение',)
-
+    tags = models.ManyToManyField(Tag, related_name='tags', through='Scope')
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 
     def __str__(self):
         return self.title
+
+
+class Scope(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='scopes')
+    is_main = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Раздел'
+        verbose_name_plural = 'Тематики статьи'
+        ordering = ['-is_main', 'tag__name']

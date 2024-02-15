@@ -15,7 +15,13 @@
                 <p>{{book.pub_date}}</p>
             </div>
             {% endfor %}
-        </div>
-    </div>
+            </div>
+            <a>
+            <a href = '{% url 'books' %}{{ previos_page }}'> <buttom> {{ previos_page }} </buttom></a>
+            </a>
+            <a>
+            <a href = '{% url 'books' %}{{ next_page }}'> <buttom> {{ next_page }} </buttom></a>
+            </a>
 
+    </div>
 {% endblock %}
