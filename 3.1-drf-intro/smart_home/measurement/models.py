@@ -10,6 +10,7 @@ class Sensor(models.Model):
 
 
 class Measurement(models.Model):
-    id_sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='sensor_meas')
+    id_sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='measurements')
     temperature = models.FloatField()
     data_time = models.DateTimeField(auto_now=True)
+    #image = models.ImageField(upload_to='/article', height_field=100, width_field=100,null=True, blank=True)
